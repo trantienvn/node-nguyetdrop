@@ -70,7 +70,7 @@ class ServerConnection {
 
     _onDisconnect() {
         console.log('WS: server disconnected');
-        Events.fire('notify-user', 'Connection lost. Retry in 5 seconds...');
+        Events.fire('notify-user', 'Kết nối bị mất. Thử lại sau 5 giây...');
         clearTimeout(this._reconnectTimer);
         this._reconnectTimer = setTimeout(_ => this._connect(), 5000);
     }
@@ -212,7 +212,7 @@ class Peer {
         this._reader = null;
         this._busy = false;
         this._dequeueFile();
-        Events.fire('notify-user', 'File transfer completed.');
+        Events.fire('notify-user', 'Chuyển tập tin hoàn tất.');
     }
 
     sendText(text) {

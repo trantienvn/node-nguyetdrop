@@ -32,13 +32,13 @@ const http = require('http');
 const limiter = RateLimit({
 	windowMs: 5 * 60 * 1000, // 5 minutes
 	max: 100, // Limit each IP to 100 requests per `window` (here, per 5 minutes)
-	message: 'Too many requests from this IP Address, please try again after 5 minutes.',
+	message: 'Quá nhiều yêu cầu từ Địa chỉ IP này, vui lòng thử lại sau 5 phút.',
 	standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
 	legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 })
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 const publicRun = process.argv[2];
 
 app.use(limiter);
@@ -77,8 +77,8 @@ class SnapdropServer {
         this._wss.on('headers', (headers, response) => this._onHeaders(headers, response));
 
         this._rooms = {};
-
-        console.log('Snapdrop is running on port', port);
+        console.log('From TranTien With Love❤️❤️');
+        console.log('NguyetDrop đang chạy trên cổng', port);
     }
 
     _onConnection(peer) {
@@ -275,7 +275,7 @@ class Peer {
         }
 
         if(!deviceName)
-            deviceName = 'Unknown Device';
+            deviceName = 'Không xác định';
 
         const displayName = uniqueNamesGenerator({
             length: 2,

@@ -9,7 +9,7 @@ window.iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 Events.on('display-name', e => {
     const me = e.detail.message;
     const $displayName = $('displayName')
-    $displayName.textContent = 'You are known as ' + me.displayName;
+    $displayName.textContent = 'Tên bạn là ' + me.displayName;
     $displayName.title = me.deviceName;
 });
 
@@ -74,7 +74,7 @@ class PeerUI {
 
     html() {
         return `
-            <label class="column center" title="Click to send files or right click to send a text">
+            <label class="column center" title="Nhấp để gửi tệp hoặc nhấp chuột phải để gửi văn bản">
                 <input type="file" multiple>
                 <x-icon shadow="1">
                     <svg class="icon"><use xlink:href="#"/></svg>
@@ -375,7 +375,7 @@ class ReceiveTextDialog extends Dialog {
 
     async _onCopy() {
         await navigator.clipboard.writeText(this.$text.textContent);
-        Events.fire('notify-user', 'Copied to clipboard');
+        Events.fire('notify-user', 'Đã sao chép vào clipboard');
     }
 }
 
@@ -415,7 +415,7 @@ class Notifications {
                 Events.fire('notify-user', Notifications.PERMISSION_ERROR || 'Error');
                 return;
             }
-            this._notify('Even more snappy sharing!');
+            this._notify('Chia sẻ linh hoạt hơn nữa!');
             this.$button.setAttribute('hidden', 1);
         });
     }
@@ -444,16 +444,16 @@ class Notifications {
 
     _messageNotification(message) {
         if (isURL(message)) {
-            const notification = this._notify(message, 'Click to open link');
+            const notification = this._notify(message, 'Nhấp để mở liên kết');
             this._bind(notification, e => window.open(message, '_blank', null, true));
         } else {
-            const notification = this._notify(message, 'Click to copy text');
+            const notification = this._notify(message, 'Nhấp để sao chép văn bản');
             this._bind(notification, e => this._copyText(message, notification));
         }
     }
 
     _downloadNotification(message) {
-        const notification = this._notify(message, 'Click to download');
+        const notification = this._notify(message, 'Bấm chuột để tải xuống');
         if (!window.isDownloadSupported) return;
         this._bind(notification, e => this._download(notification));
     }
@@ -466,7 +466,7 @@ class Notifications {
     _copyText(message, notification) {
         notification.close();
         if (!navigator.clipboard.writeText(message)) return;
-        this._notify('Copied text to clipboard');
+        this._notify('Đã sao chép văn bản vào khay nhớ tạm');
     }
 
     _bind(notification, handler) {
@@ -490,11 +490,11 @@ class NetworkStatusUI {
     }
 
     _showOfflineMessage() {
-        Events.fire('notify-user', 'You are offline');
+        Events.fire('notify-user', 'Bạn đang offline');
     }
 
     _showOnlineMessage() {
-        Events.fire('notify-user', 'You are back online');
+        Events.fire('notify-user', 'Bạn đã trực tuyến trở lại');
     }
 }
 
